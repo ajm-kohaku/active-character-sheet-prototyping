@@ -1,0 +1,24 @@
+//
+   Created by Niertis on 2/21/2016.
+div.stat-block-title {{generalInfo.characterName}}
+div.stat-block-content
+  | {{generalInfo.gender}} {{generalInfo.race}}&nbsp;
+  span(ng-repeat="classes in generalInfo.characterClasses")
+    | {{classes.className}} {{classes.classLevel}}&nbsp;
+  p
+    | {{generalInfo.alignment}} {{generalInfo.size}} {{generalInfo.creatureType}}
+  p
+    strong Init
+    span +{{dex.value}}
+div.stat-block-breaker Defense
+div.stat-block-content
+  | and there's some text in here and shit
+div.stat-block-breaker Offense
+div.stat-block-content
+  | add the offense data here
+div.stat-block-breaker Statistics
+div.stat-block-content
+  | add the statistics data here
+div.stat-block-breaker Special Abilities
+div.stat-block-content
+  | add the special ability detail data here

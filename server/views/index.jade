@@ -1,13 +1,12 @@
 extends ../includes/layout
-
 block main-content
-  .navbar.navbar-inverse.navbar-fixed-top
-    .container
+  .navbar.navbar-fixed-top
+    .container-fluid
       .navbar-header
         a.navbar-brand(href="/") Active Pathfinder Character sheet
-        ul.nav.navbar-nav
-          li
-            a(href="/") Home
+       ul.nav.navbar-nav
+        li
+          a(href="/") Home
   section.modal-content
     div(ng-view)
 
