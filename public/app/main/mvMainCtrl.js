@@ -119,53 +119,28 @@ angular.module('app').controller('mvMainCtrl', function ($scope) {
         ]
     };
 
-    var data = abilityScores.dexterity;
     function getDexScore() {
-        dex = data;
+        var dex = abilityScores.dexterity;
         var val = 0;
-        console.log('dex array size: '+dex.length);
         for (var i = 0; i < dex.length; i++) {
-            console.log('dex value at ['+i+'] is: '+dex[i].value);
             val += dex[i].value;
-
         }
         return val;
     }
-    $scope.dex = function() {
-        dex = data;
-        var val = 0;
-        console.log('dex array size: '+dex.length);
-        for (var i = 0; i < dex.length; i++) {
-            console.log('dex value at ['+i+'] is: '+dex[i].value);
-            val += dex[i].value;
 
-        }
-        return val;
+    $scope.init = function () {
+        return getDexScore();
     };
 
-    console.log('My dex score is: '+ getDexScore());
+    //$scope.init = function(){
+    //    var dexScore = getDexScore();
+    //    return dexScore;
+    //};
 
-    //var myArray = [];
-    //var score = 0;
-    //function getAbilityScore(myArray) {
-    //    for (var i = 0; i < myArray.length; i++) {
-    //        if (myArray[i].name === "value") {
-    //            return myArray[i];
-    //        }
-    //        score += myArray[i];
-    //    }
-    //    console.log('Getting ability score value from array ' + myArray);
-    //    return score;
-    //}
-    //
-    //function abilityMod(score) {
-    //    return Math.floor((score - 10) / 2);
-    //}
-    //getAbilityScore(myArray);
-    //abilityMod(score);
-    //var dexMod = function() {
-    //    console.log(this.abilityScores.dexterity)
-    //    return abilityMod(getAbilityScore(this.abilityScores.dexterity));
-    //}
+    console.log('My dex score is: '+ $scope.init());
+    getDexScore();
+
+    $scope.test = 5;
+
 
 });
