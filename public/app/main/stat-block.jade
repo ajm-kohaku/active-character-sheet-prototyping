@@ -1,18 +1,22 @@
 //
    Created by Niertis on 2/21/2016.
+
 div.stat-block-title {{generalInfo.characterName}}
 div.stat-block-content
   | {{generalInfo.gender}} {{generalInfo.race}}&nbsp;
   span(ng-repeat="classes in generalInfo.characterClasses")
     | {{classes.className}} {{classes.classLevel}}&nbsp;
   p
-    | {{generalInfo.alignment}} {{generalInfo.size}} {{generalInfo.creatureType}}
-  p
+    | {{generalInfo.alignment}} {{generalInfo.size}} {{generalInfo.creatureType}} <br/>
     strong Init
-    span &nbsp;+{{init()}}
+    span &nbsp;+{{init()}};&nbsp;
+    strong Senses&nbsp;
+    span {{sensesString()}}; Perception +{{perception()}}
 div.stat-block-breaker Defense
 div.stat-block-content
-  | and there's some text in here and shit
+  strong AC&nbsp;
+  | {{ac()}}, touch {{touchAC()}}, flat-footed {{flatFootedAC()}}
+  |
 div.stat-block-breaker Offense
 div.stat-block-content
   | add the offense data here
