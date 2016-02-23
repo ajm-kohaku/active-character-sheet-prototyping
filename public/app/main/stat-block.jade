@@ -1,27 +1,34 @@
 //
    Created by Niertis on 2/21/2016.
-
-div.stat-block-title {{generalInfo.characterName}}
-div.stat-block-content
-  | {{generalInfo.gender}} {{generalInfo.race}}&nbsp;
-  span(ng-repeat="classes in generalInfo.characterClasses")
-    | {{classes.className}} {{classes.classLevel}}&nbsp;
-  p
-    | {{generalInfo.alignment}} {{generalInfo.size}} {{generalInfo.creatureType}} <br/>
-    strong Init
-    span &nbsp;+{{init()}};&nbsp;
-    strong Senses&nbsp;
-    span {{sensesString()}}; Perception +{{perception()}}
-div.stat-block-breaker Defense
-div.stat-block-content
-  strong AC&nbsp;
-  | {{ac()}}, touch {{touchAC()}}, flat-footed {{flatFootedAC()}}
-div.stat-block-breaker Offense
-div.stat-block-content
-  | add the offense data here
-div.stat-block-breaker Statistics
-div.stat-block-content
-  | add the statistics data here
-div.stat-block-breaker Special Abilities
-div.stat-block-content
-  | add the special ability detail data here
+div.well.well-sm
+  div.stat-block-title {{generalInfo.characterName}}
+  div.stat-block-content
+    | {{generalInfo.gender}} {{generalInfo.race}}&nbsp;
+    span(ng-repeat="classes in generalInfo.characterClasses")
+      | {{classes.className}} {{classes.value}}&nbsp; <br/>
+      | {{generalInfo.alignment}} {{generalInfo.size}} {{generalInfo.creatureType}} <br/>
+      strong Init
+      span &nbsp;+{{init()}};&nbsp;
+      strong Senses&nbsp;
+      span {{sensesString()}}; Perception +{{perception()}}
+  div.stat-block-breaker Defense
+  div.stat-block-content
+    strong AC&nbsp;
+    | {{ac()}}, touch {{touchAC()}}, flat-footed {{flatFootedAC()}} <br/>
+    strong HP&nbsp;
+    span {{hitDie()}} <br/>
+    strong Fort
+    span &nbsp;+{{fortSave()}};&nbsp;
+    strong Ref
+    span &nbsp;+{{refSave()}};&nbsp;
+    strong Will
+    span &nbsp;+{{willSave()}};&nbsp;
+  div.stat-block-breaker Offense
+  div.stat-block-content
+    | add the offense data here
+  div.stat-block-breaker Statistics
+  div.stat-block-content
+    | add the statistics data here
+  div.stat-block-breaker Special Abilities
+  div.stat-block-content
+    | add the special ability detail data here

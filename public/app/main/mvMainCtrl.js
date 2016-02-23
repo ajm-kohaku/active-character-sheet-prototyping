@@ -9,7 +9,7 @@ angular.module('app').controller('mvMainCtrl', function ($scope) {
         characterClasses: [
             {
                 className: "Sacred Fist",
-                classLevel: "16"
+                value: 16
             }
         ],
         deity: "Irori",
@@ -172,23 +172,23 @@ angular.module('app').controller('mvMainCtrl', function ($scope) {
     ];
 
     var skills = {
-     perception: [
-         {
-             type: "ranks",
-             value: 16,
-             comment: ""
-         },
-         {
-             type: "race",
-             value: 2,
-             comment: ""
-         },
-         {
-             type: "classSkill",
-             value: 3,
-             comment: ""
-         }
-     ]
+        perception: [
+            {
+                type: "ranks",
+                value: 16,
+                comment: ""
+            },
+            {
+                type: "race",
+                value: 2,
+                comment: ""
+            },
+            {
+                type: "classSkill",
+                value: 3,
+                comment: ""
+            }
+        ]
     };
 
     var armorClass = [
@@ -213,6 +213,31 @@ angular.module('app').controller('mvMainCtrl', function ($scope) {
             value: 0
         }
     ];
+    var defenseStats = {
+        hitPoints: 131,
+        hitDieType: "d8",
+        fortitude: [
+            {
+                type: "base",
+                value: 10,
+                comment: ""
+            }
+        ],
+        reflex: [
+            {
+                type: "base",
+                value: 5,
+                comment: ""
+            }
+        ],
+        will: [
+            {
+                type: "base",
+                value: 10,
+                comment: ""
+            }
+        ]
+    };
     var strength = getStatTotal(abilityScores.strength);
     var dexterity = getStatTotal(abilityScores.dexterity);
     var constitution = getStatTotal(abilityScores.constitution);
@@ -241,40 +266,52 @@ angular.module('app').controller('mvMainCtrl', function ($scope) {
 
     function getAC() {
         var ac = getAbilityMod(dexterity);
-        $.map(armorClass, function(value,index){
-            if(value.type === "wisdom"){
+        $.map(armorClass, function (value, index) {
+            if (value.type === "wisdom") {
                 ac += getAbilityMod(wisdom);
             } else {
-                ac +=value.value;
+                ac += value.value;
             }
         });
         return ac + 10;
     }
 
     function getTouchAC() {
-       var ac = getAC();
-        $.map(armorClass, function(value, index){
-           if(value.type === "armor") {
-               ac -=value.value;
-           }
-            if(value.type === "shield") {
-                ac -=value.value;
+        var ac = getAC();
+        $.map(armorClass, function (value, index) {
+            if (value.type === "armor") {
+                ac -= value.value;
             }
-            if(value.type === "natural") {
-                ac -=value.value;
+            if (value.type === "shield") {
+                ac -= value.value;
+            }
+            if (value.type === "natural") {
+                ac -= value.value;
             }
         });
         return ac;
     }
 
-    function  getFlatFootedAC() {
+    function getFlatFootedAC() {
         var ac = getAC();
-        $.map(armorClass, function(value, index){
-            if(value.type === "dodge") {
-                ac -=value.value;
+        $.map(armorClass, function (value, index) {
+            if (value.type === "dodge") {
+                ac -= value.value;
             }
         });
-        return ac-getAbilityMod(dexterity);
+        return ac - getAbilityMod(dexterity);
+    }
+
+    function getFortSave() {
+        return getStatTotal(defenseStats.fortitude) + getAbilityMod(constitution);
+    }
+
+    function getReflexSave() {
+        return getStatTotal(defenseStats.fortitude) + getAbilityMod(constitution);
+    }
+
+    function getWillSave() {
+        return getStatTotal(defenseStats.fortitude) + getAbilityMod(constitution);
     }
 
     $scope.init = function () {
@@ -289,29 +326,45 @@ angular.module('app').controller('mvMainCtrl', function ($scope) {
         return getAbilityMod(dexterity) + initModSum;
     };
 
-    $scope.sensesString = function() {
+    $scope.sensesString = function () {
         var parts = [];
-        $.map(senses,function(value,index){
+        $.map(senses, function (value, index) {
             parts.push(value.type);
         });
-        var combinedString =parts.join(", ");
-        return combinedString.substr(0,combinedString.length - 1);
+        var combinedString = parts.join(", ");
+        return combinedString.substr(0, combinedString.length - 1);
     };
 
-    $scope.perception = function() {
-        return getAbilityMod(wisdom)+getStatTotal(skills.perception);
+    $scope.perception = function () {
+        return getAbilityMod(wisdom) + getStatTotal(skills.perception);
     };
 
-    $scope.ac = function() {
+    $scope.ac = function () {
         return getAC();
     };
 
-    $scope.touchAC = function(){
+    $scope.touchAC = function () {
         return getTouchAC();
     };
 
-    $scope.flatFootedAC = function(){
+    $scope.flatFootedAC = function () {
         return getFlatFootedAC();
     };
+    $scope.fortSave = function () {
+        return getFortSave();
+    };
+    $scope.refSave = function () {
+        return getReflexSave();
+    };
+    $scope.willSave = function () {
+        return getWillSave();
+    };
 
+    $scope.hitDie = function() {
+        var generalInfo = this.generalInfo;
+        var extraPoints = getStatTotal(generalInfo.characterClasses) * getAbilityMod(constitution);
+        console.log('my extrapoints are: '+extraPoints);
+        return defenseStats.hitPoints+" ("+getStatTotal(generalInfo.characterClasses)+defenseStats.hitDieType+"+"+extraPoints+")";
+
+    };
 });
