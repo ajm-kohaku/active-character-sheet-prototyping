@@ -22,7 +22,15 @@ div.well.well-sm
     strong Ref
     span &nbsp;+{{refSave()}};&nbsp;
     strong Will
-    span &nbsp;+{{willSave()}};&nbsp;
+    //todo: figure out how to aggregate conditional conditions on saves
+    span &nbsp;+{{willSave()}};&nbsp;([placeholder]) <br/>
+    //todo: perhaps this should use an ng-show so that the info displays only when necessary
+    strong Defensive Abilities
+    //todo: figure out how to aggregate defensive abilities. maybe add a boolean to special abilities?
+    span &nbsp;[placeholder] <br/>
+    //todo: perhaps this should use an ng-show so that the info displays only when necessary
+    strong Weaknesses
+    span &nbsp;[placeholder] <br/>
   div.stat-block-breaker Offense
   div.stat-block-content
     | add the offense data here
