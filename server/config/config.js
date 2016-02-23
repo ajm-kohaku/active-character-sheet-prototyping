@@ -11,6 +11,6 @@ module.exports = {
     },
     production: {
         rootPath: rootPath,
-        port: process.env.PORT || 3030
+        port: process.env.PORT || 80
     }
 };
