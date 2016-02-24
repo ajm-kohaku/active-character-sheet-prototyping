@@ -1,12 +1,12 @@
 //
    Created by Niertis on 2/21/2016.
 div.well.well-sm
-  div.stat-block-title {{generalInfo.characterName}}
+  div.stat-block-title {{character.generalInfo.characterName}}
   div.stat-block-content
-    | {{generalInfo.gender}} {{generalInfo.race}}&nbsp;
-    span(ng-repeat="classes in generalInfo.characterClasses")
+    | {{character.generalInfo.gender}} {{character.generalInfo.race}}&nbsp;
+    span(ng-repeat="classes in character.generalInfo.characterClasses")
       | {{classes.className}} {{classes.value}}&nbsp; <br/>
-      | {{generalInfo.alignment}} {{generalInfo.size}} {{generalInfo.creatureType}} <br/>
+      | {{character.generalInfo.alignment}} {{character.generalInfo.size}} {{character.generalInfo.creatureType}} <br/>
       strong Init
       span &nbsp;+{{init()}};&nbsp;
       strong Senses&nbsp;
@@ -33,10 +33,33 @@ div.well.well-sm
     span &nbsp;[placeholder] <br/>
   div.stat-block-breaker Offense
   div.stat-block-content
-    | add the offense data here
+    strong Speed&nbsp;
+    span [placeholder-speed] <br/>
+    strong Melee&nbsp;
+    span [placeholder-melee] <br/>
+    strong Range&nbsp;
+    span [placeholder-range] <br/>
+    strong Special Attacks <br/>
+    span [placeholder-specialAttacks] <br/>
+    strong [spellCastingClass] Spells Known&nbsp;
+    sapn (CL [spellCastingClassLevel]; concentration +[calcConcentration]) <br/>
+    div.stat-block-indent
+        span [placeholder for spell lists]
   div.stat-block-breaker Statistics
   div.stat-block-content
-    | add the statistics data here
-  div.stat-block-breaker Special Abilities
+    strong Str&nbsp;
+    span {{strength}} (+{{strMod()}})&nbsp;
+    strong Dex&nbsp;
+    span {{dexterity}} (+{{dexMod()}})&nbsp;
+    strong Con&nbsp;
+    span {{constitution}} (+{{conMod()}})&nbsp;
+    strong Int&nbsp;
+    span {{Intelligence}} (+{{intMod()}})&nbsp;
+    strong Wis&nbsp;
+    span {{wisdom}} (+{{wisMod()}})&nbsp;
+    strong Cha&nbsp;
+    span {{charisma}} (+{{chaMod()}})&nbsp; <br/>
+    strong BAB
+    div.stat-block-breaker Special Abilities
   div.stat-block-content
     | add the special ability detail data here
