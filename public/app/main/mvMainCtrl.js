@@ -134,24 +134,24 @@ angular.module('app').controller('mvMainCtrl', function ($scope) {
             }
         ],
         skills: {
-        perception: [
-            {
-                type: "ranks",
-                value: 16,
-                comment: ""
-            },
-            {
-                type: "race",
-                value: 2,
-                comment: ""
-            },
-            {
-                type: "classSkill",
-                value: 3,
-                comment: ""
-            }
-        ]
-    },
+            perception: [
+                {
+                    type: "ranks",
+                    value: 16,
+                    comment: ""
+                },
+                {
+                    type: "race",
+                    value: 2,
+                    comment: ""
+                },
+                {
+                    type: "classSkill",
+                    value: 3,
+                    comment: ""
+                }
+            ]
+        },
         armorClass: [
             {
                 type: "armor",
@@ -255,6 +255,15 @@ angular.module('app').controller('mvMainCtrl', function ($scope) {
         return sum;
     }
 
+    function getBaseAttack() {
+        var classes = character.generalInfo.characterClasses;
+        var sum = 0;
+        $.map(classes, function (value, index) {
+            sum += value.baseAttack;
+        });
+        return sum;
+    }
+
     function getAbilityMod() {
         var score = arguments[0];
         var mod = 0;
@@ -273,7 +282,8 @@ angular.module('app').controller('mvMainCtrl', function ($scope) {
                 ac += value.value;
             }
         });
-        return ac + 10;
+        var size = getSizeMod();
+        return ac + size + 10;
     }
 
     function getTouchAC() {
@@ -312,6 +322,28 @@ angular.module('app').controller('mvMainCtrl', function ($scope) {
 
     function getWillSave() {
         return getStatTotal(character.defenseStats.will) + getAbilityMod(wisdom);
+    }
+
+    function getSizeMod() {
+        var size = character.generalInfo.size;
+        if (size === "Medium") {
+            return 0;
+        } else if (size === "Large") {
+            return -1;
+        } else if (size === "Small") {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    function getCmb() {
+        var cmb = getBaseAttack() + getAbilityMod(strength) + getSizeMod();
+        return cmb;
+    }
+
+    function getCmd() {
+        return null;
     }
 
     $scope.init = function () {
@@ -392,4 +424,12 @@ angular.module('app').controller('mvMainCtrl', function ($scope) {
     $scope.chaMod = function () {
         return getAbilityMod(charisma);
     };
+
+    $scope.bab = function () {
+        return getBaseAttack();
+    };
+
+    $scope.cmb = function () {
+        return getCmb();
+    }
 });

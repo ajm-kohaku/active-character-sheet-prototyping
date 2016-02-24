@@ -54,12 +54,17 @@ div.well.well-sm
     strong Con&nbsp;
     span {{constitution}} (+{{conMod()}})&nbsp;
     strong Int&nbsp;
-    span {{Intelligence}} (+{{intMod()}})&nbsp;
+    span {{intelligence}} (+{{intMod()}})&nbsp;
     strong Wis&nbsp;
     span {{wisdom}} (+{{wisMod()}})&nbsp;
     strong Cha&nbsp;
     span {{charisma}} (+{{chaMod()}})&nbsp; <br/>
-    strong BAB
+    strong BAB&nbsp;
+    span +{{bab()}};&nbsp;
+    strong CMB&nbsp;
+    span +{{cmb()}};&nbsp;
+    strong CMD&nbsp;
+    span {{cmd()}}
     div.stat-block-breaker Special Abilities
   div.stat-block-content
     | add the special ability detail data here
