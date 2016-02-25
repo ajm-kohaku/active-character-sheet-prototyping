@@ -415,10 +415,11 @@ angular.module('app').controller('mvMainCtrl', function ($scope) {
         return parts.join(", ");
     }
 
+    //todo: continue creating this function.
     function getSkillList() {
         var parts = {};
-        $.map(character.skills, function(value, index) {
-            parts.push(value);
+        $.map(character.skills, function(value, key) {
+            parts.push(key);
         })
     }
 
