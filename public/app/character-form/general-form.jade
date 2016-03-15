@@ -1,0 +1,31 @@
+//
+   Created by Niertis on 3/14/2016.
+
+form.form-inline
+  div.form-group
+    label(for="playerName") Player Name
+    input.form-control(name="playerName", type="text", placeholder="{{character.generalInfo.playerName}}", ng-model="character.generalInfo.playerName", required)
+  div.form-group
+    label(for="characterName") Character Name
+    input.form-control(name="characterName", type="text", placeholder="{{character.generalInfo.characterName}}", ng-model="character.generalInfo.characterName", required)
+  div.form-group
+    label(for="alignment") Alignment
+    select(ng-model="character.generalInfo.alignment", ng-options="align for align in getAlignments()")
+  div.form-group
+    label(for="deity") Deity
+    input.form-control(name="deity", type="text", placeholder="{{character.generalInfo.deity}}", ng-model="character.generalInfo.deity")
+  div.form-group
+    label(for="homeland") Homeland
+    input.form-control(name="homeland", type="text", placeholder="{{character.generalInfo.homeland}}", ng-model="character.generalInfo.homeland")
+  div.form-group
+    label(for="race") Race
+    input.form-control(name="race", type="text", placeholder="{{character.generalInfo.race}}", ng-model="character.generalInfo.race")
+  div.form-group
+    label(for="creatureType") Creature Type
+    input.form-control(name="creatureType", type="text", placeholder="{{character.generalInfo.creatureType}}", ng-model="character.generalInfo.creatureType")
+  div.form-group
+    label(for="gender") Gender
+    select(ng-model="character.generalInfo.gender", ng-options="gender for gender in getGenders()")
+  div.form-group
+    label(for="size") Size
+    select(ng-model="character.generalInfo.size", ng-options="size for size in getSizes()")
